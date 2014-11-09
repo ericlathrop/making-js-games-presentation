@@ -75,6 +75,23 @@ ctx.fillRect(270, 190, 100, 100);
 				</section>
 
 				<section>
+					<canvas id="canvas3" width="640" height="480"></canvas>
+					<script>
+						var canvas = document.getElementById('canvas3');
+						var ctx = canvas.getContext("2d");
+						ctx.fillStyle = "yellow";
+						ctx.font = "60px sans-serif";
+						ctx.fillText("Hello World!", 150, 250);
+					</script>
+					<pre><code>
+						ctx.fillStyle = "yellow";
+						ctx.font = "60px sans-serif";
+						ctx.fillText("Hello World!", 150, 250);
+					</code></pre>
+				</section>
+
+
+				<section>
 					<h2>Heads Up</h2>
 					<p>
 						reveal.js is a framework for easily creating beautiful presentations using HTML. You'll need a browser with
