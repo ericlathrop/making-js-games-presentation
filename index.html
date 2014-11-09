@@ -90,6 +90,47 @@ ctx.fillRect(270, 190, 100, 100);
 					</code></pre>
 				</section>
 
+				<section data-state="canvas4">
+					<canvas id="canvas4" width="640" height="300"></canvas>
+					<pre><code>
+function render(time) {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	ctx.fillStyle = "yellow";
+	ctx.font = "60px sans-serif";
+	ctx.fillText(time, 150, 150);
+	window.requestAnimationFrame(render);
+}
+window.requestAnimationFrame(render);
+					</code></pre>
+				</section>
+
+				<section data-state="canvas5">
+					<canvas id="canvas5" width="640" height="300"></canvas>
+					<pre><code>
+var lastTime = -1;
+function elapsedTime(time) {
+	var elapsed = time - lastTime;
+	if (lastTime === -1) {
+		elapsed = 0;
+	}
+	lastTime = time;
+	return elapsed;
+}
+					</code></pre>
+				</section>
+
+				<section data-state="canvas6">
+					<canvas id="canvas6" width="640" height="300"></canvas>
+					<pre><code>
+var fps = Math.floor((1 / elapsed) * 1000) + " FPS";
+					</code></pre>
+				</section>
+
+				<section data-state="canvas7">
+					<canvas id="canvas7" width="640" height="480"></canvas>
+					<pre><code>
+					</code></pre>
+				</section>
 
 				<section>
 					<h2>Heads Up</h2>
@@ -431,5 +472,89 @@ function linkify( selector ) {
 
 		</script>
 
+		<script>
+			var stateChanged = false;
+			var state = false;
+			var renderFuncs = {};
+
+			function makeRender(renderFunc) {
+				var canvas = document.getElementById(state);
+				var ctx = canvas.getContext("2d");
+
+				var lastTime = -1;
+				function elapsedTime(time) {
+					var elapsed = time - lastTime;
+					if (lastTime === -1) {
+						elapsed = 0;
+					}
+					lastTime = time;
+					return elapsed;
+				}
+
+				var render = function(time) {
+					if (!state) {
+						return;
+					}
+
+					renderFunc(canvas, ctx, time, elapsedTime(time));
+					if (state) {
+						window.requestAnimationFrame(render);
+					}
+				}
+				return render;
+			}
+
+			function slideChanged() {
+				if (!stateChanged) {
+					state = false;
+					return;
+				}
+				stateChanged = false;
+
+				var canvas = document.getElementById(state);
+				var ctx = canvas.getContext("2d");
+				var render = makeRender(renderFuncs[state]);
+				window.requestAnimationFrame(render);
+			}
+
+			Reveal.addEventListener("slidechanged", slideChanged);
+
+			function renderSlide(id, renderFunc) {
+				renderFuncs[id] = renderFunc;
+				Reveal.addEventListener(id, function() {
+					stateChanged = true;
+					state = id;
+				}, false);
+			}
+
+			renderSlide("canvas4", function(canvas, ctx, time) {
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				ctx.fillStyle = "yellow";
+				ctx.font = "60px sans-serif";
+				ctx.fillText(time, 150, 150);
+			});
+
+			renderSlide("canvas5", function(canvas, ctx, time, elapsed) {
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				ctx.fillStyle = "yellow";
+				ctx.font = "60px sans-serif";
+				ctx.fillText(elapsed, 150, 150);
+			});
+
+			renderSlide("canvas6", function(canvas, ctx, time, elapsed) {
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				ctx.fillStyle = "yellow";
+				ctx.font = "60px sans-serif";
+				var fps = Math.floor((1 / elapsed) * 1000) + " FPS";
+				ctx.fillText(fps, 150, 150);
+			});
+
+			var hamster = new Image();
+			hamster.src = "hamster-run-right-f22.png";
+			renderSlide("canvas7", function(canvas, ctx, time) {
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				ctx.drawImage(hamster, 50, 50);
+			});
+		</script>
 	</body>
 </html>
