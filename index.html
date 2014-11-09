@@ -16,6 +16,7 @@
 
 		<link rel="stylesheet" href="css/reveal.min.css">
 		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+		<link rel="stylesheet" href="css/makingjsgames.css">
 
 		<!-- For syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -48,6 +49,29 @@
 					<p>
 						<small>Created by <a href="http://ericlathrop.com">Eric Lathrop</a> / <a href="http://twitter.com/ericlathrop">@ericlathrop</a></small>
 					</p>
+				</section>
+
+				<section>
+					<canvas id="canvas1" width="640" height="480"></canvas>
+					<pre><code>
+<canvas id="canvas" width="640" height="480"></canvas>
+					</code></pre>
+				</section>
+
+				<section>
+					<canvas id="canvas2" width="640" height="480"></canvas>
+					<script>
+						var canvas = document.getElementById('canvas2');
+						var ctx = canvas.getContext("2d");
+						ctx.fillStyle = "#f00";
+						ctx.fillRect(270, 190, 100, 100);
+					</script>
+					<pre><code>
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext("2d");
+ctx.fillStyle = "#f00";
+ctx.fillRect(270, 190, 100, 100);
+					</code></pre>
 				</section>
 
 				<section>
