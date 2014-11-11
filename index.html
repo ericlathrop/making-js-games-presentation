@@ -52,16 +52,16 @@
 				</section>
 
 				<section>
-					<canvas id="canvas1" width="640" height="480"></canvas>
+					<canvas id="canvas" width="640" height="480"></canvas>
 					<pre><code>
 <canvas id="canvas" width="640" height="480"></canvas>
 					</code></pre>
 				</section>
 
 				<section>
-					<canvas id="canvas2" width="640" height="480"></canvas>
+					<canvas id="canvas-rect" width="640" height="480"></canvas>
 					<script>
-						var canvas = document.getElementById("canvas2");
+						var canvas = document.getElementById("canvas-rect");
 						var ctx = canvas.getContext("2d");
 						ctx.fillStyle = "#f00";
 						ctx.fillRect(270, 190, 100, 100);
@@ -75,9 +75,9 @@ ctx.fillRect(270, 190, 100, 100);
 				</section>
 
 				<section>
-					<canvas id="canvas3" width="640" height="480"></canvas>
+					<canvas id="canvas-text" width="640" height="480"></canvas>
 					<script>
-						var canvas = document.getElementById("canvas3");
+						var canvas = document.getElementById("canvas-text");
 						var ctx = canvas.getContext("2d");
 						ctx.fillStyle = "yellow";
 						ctx.font = "60px sans-serif";
@@ -90,8 +90,28 @@ ctx.fillRect(270, 190, 100, 100);
 					</code></pre>
 				</section>
 
-				<section data-state="canvas4">
-					<canvas id="canvas4" width="640" height="300"></canvas>
+				<section data-state="canvas-image">
+					<canvas id="canvas-image" width="640" height="480"></canvas>
+					<script>
+						var canvas = document.getElementById("canvas-image");
+						var ctx = canvas.getContext("2d");
+						var logo = new Image();
+						logo.addEventListener("load", function() {
+							ctx.drawImage(logo, 70, 100);
+						});
+						logo.src = "two-scoop-games-logo.png";
+					</script>
+					<pre><code>
+var logo = new Image();
+logo.addEventListener("load", function() {
+	ctx.drawImage(logo, 70, 100);
+});
+logo.src = "two-scoop-games-logo.png";
+					</code></pre>
+				</section>
+
+				<section data-state="canvas-render-loop">
+					<canvas id="canvas-render-loop" width="640" height="300"></canvas>
 					<pre><code>
 function render(time) {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -104,8 +124,8 @@ window.requestAnimationFrame(render);
 					</code></pre>
 				</section>
 
-				<section data-state="canvas5">
-					<canvas id="canvas5" width="640" height="300"></canvas>
+				<section data-state="canvas-render-loop-elapsed">
+					<canvas id="canvas-render-loop-elapsed" width="640" height="300"></canvas>
 					<pre><code>
 var lastTime = -1;
 function elapsedTime(time) {
@@ -119,16 +139,10 @@ function elapsedTime(time) {
 					</code></pre>
 				</section>
 
-				<section data-state="canvas6">
-					<canvas id="canvas6" width="640" height="300"></canvas>
+				<section data-state="canvas-fps">
+					<canvas id="canvas-fps" width="640" height="300"></canvas>
 					<pre><code>
 var fps = Math.floor((1 / elapsed) * 1000) + " FPS";
-					</code></pre>
-				</section>
-
-				<section data-state="canvas7">
-					<canvas id="canvas7" width="640" height="480"></canvas>
-					<pre><code>
 					</code></pre>
 				</section>
 
@@ -527,21 +541,21 @@ function linkify( selector ) {
 				}, false);
 			}
 
-			renderSlide("canvas4", function(canvas, ctx, time) {
+			renderSlide("canvas-render-loop", function(canvas, ctx, time) {
 				ctx.clearRect(0, 0, canvas.width, canvas.height);
 				ctx.fillStyle = "yellow";
 				ctx.font = "60px sans-serif";
 				ctx.fillText(time, 150, 150);
 			});
 
-			renderSlide("canvas5", function(canvas, ctx, time, elapsed) {
+			renderSlide("canvas-render-loop-elapsed", function(canvas, ctx, time, elapsed) {
 				ctx.clearRect(0, 0, canvas.width, canvas.height);
 				ctx.fillStyle = "yellow";
 				ctx.font = "60px sans-serif";
 				ctx.fillText(elapsed, 150, 150);
 			});
 
-			renderSlide("canvas6", function(canvas, ctx, time, elapsed) {
+			renderSlide("canvas-fps", function(canvas, ctx, time, elapsed) {
 				ctx.clearRect(0, 0, canvas.width, canvas.height);
 				ctx.fillStyle = "yellow";
 				ctx.font = "60px sans-serif";
@@ -549,12 +563,6 @@ function linkify( selector ) {
 				ctx.fillText(fps, 150, 150);
 			});
 
-			var hamster = new Image();
-			hamster.src = "hamster-run-right-f22.png";
-			renderSlide("canvas7", function(canvas, ctx, time) {
-				ctx.clearRect(0, 0, canvas.width, canvas.height);
-				ctx.drawImage(hamster, 50, 50);
-			});
 		</script>
 	</body>
 </html>
