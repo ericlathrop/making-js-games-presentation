@@ -104,7 +104,7 @@ ctx.fillRect(270, 190, 100, 100);
 					<pre><code>
 var logo = new Image();
 logo.addEventListener("load", function() {
-	ctx.drawImage(logo, 70, 100);
+    ctx.drawImage(logo, 70, 100);
 });
 logo.src = "two-scoop-games-logo.png";
 					</code></pre>
@@ -114,11 +114,11 @@ logo.src = "two-scoop-games-logo.png";
 					<canvas id="canvas-render-loop" width="640" height="300"></canvas>
 					<pre><code>
 function render(time) {
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	ctx.fillStyle = "yellow";
-	ctx.font = "60px sans-serif";
-	ctx.fillText(time, 150, 150);
-	window.requestAnimationFrame(render);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "yellow";
+    ctx.font = "60px sans-serif";
+    ctx.fillText(time, 150, 150);
+    window.requestAnimationFrame(render);
 }
 window.requestAnimationFrame(render);
 					</code></pre>
@@ -129,12 +129,12 @@ window.requestAnimationFrame(render);
 					<pre><code>
 var lastTime = -1;
 function elapsedTime(time) {
-	var elapsed = time - lastTime;
-	if (lastTime === -1) {
-		elapsed = 0;
-	}
-	lastTime = time;
-	return elapsed;
+    var elapsed = time - lastTime;
+    if (lastTime === -1) {
+        elapsed = 0;
+    }
+    lastTime = time;
+    return elapsed;
 }
 					</code></pre>
 				</section>
@@ -153,21 +153,21 @@ var fps = Math.floor((1 / elapsed) * 1000) + " FPS";
 					</div>
 					<pre><code>
 var animation = {
-	img: new Image(),
-	time: 0,
-	frames: 22,
-	msPerFrame: 40,
-	advance: function(elapsed) {
-	    this.time += elapsed;
-	},
-	draw: function(ctx, x, y) {
-	    var width = this.img.width / this.frames;
-	    var frame = Math.floor(this.time / this.msPerFrame) % this.frames;
-	    var frameX = frame * width;
-	    ctx.drawImage(this.img,
-	        frameX, 0, width, this.img.height,
-	        x, y, width, this.img.height);
-	}
+    img: new Image(),
+    time: 0,
+    frames: 22,
+    msPerFrame: 40,
+    advance: function(elapsed) {
+        this.time += elapsed;
+    },
+    draw: function(ctx, x, y) {
+        var width = this.img.width / this.frames;
+        var frame = Math.floor(this.time / this.msPerFrame) % this.frames;
+        var frameX = frame * width;
+        ctx.drawImage(this.img,
+            frameX, 0, width, this.img.height,
+            x, y, width, this.img.height);
+    }
 };
 animation.img.src = "hamster-run-right-f22.png";
 					</code></pre>
