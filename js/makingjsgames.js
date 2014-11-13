@@ -105,3 +105,47 @@ renderSlide("canvas-animation", function(canvas, ctx, time, elapsed) {
 	animation.advance(elapsed);
 	animation.draw(ctx, 260, 25);
 });
+
+var boxX = 200, boxY = 100, boxSpeed = .2;
+var canvasKeyboardSpeedInput = document.getElementById("canvas-keyboard-speed");
+var updateCanvasKeyboardSpeed = function() {
+	boxSpeed = parseFloat(canvasKeyboardSpeedInput.value);
+};
+canvasKeyboardSpeedInput.addEventListener("keyup", updateCanvasKeyboardSpeed);
+updateCanvasKeyboardSpeed();
+
+var keys = {}, keyMap = { 87: 'w', 65: 'a', 83: 's', 68: 'd' };
+window.addEventListener("keydown", function(e) {
+	keys[keyMap[e.keyCode]] = true;
+});
+window.addEventListener("keyup", function(e) {
+	keys[keyMap[e.keyCode]] = false;
+});
+renderSlide("canvas-keyboard", function(canvas, ctx, time, elapsed) {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+	if (keys["w"]) {
+		boxY -= boxSpeed * elapsed;
+	}
+	if (keys["a"]) {
+		boxX -= boxSpeed * elapsed;
+	}
+	if (keys["d"]) {
+		boxX += boxSpeed * elapsed;
+	}
+	if (keys["s"]) {
+		boxY += boxSpeed * elapsed;
+	}
+	ctx.fillStyle = "red";
+	ctx.fillRect(boxX, boxY, 100, 100);
+
+	ctx.font = "40px sans-serif";
+	ctx.fillStyle = keys["w"] ? "#ff0" : "#660";
+	ctx.fillText("w", 50, 50);
+	ctx.fillStyle = keys["a"] ? "#ff0" : "#660";
+	ctx.fillText("a", 20, 90);
+	ctx.fillStyle = keys["s"] ? "#ff0" : "#660";
+	ctx.fillText("s", 55, 90);
+	ctx.fillStyle = keys["d"] ? "#ff0" : "#660";
+	ctx.fillText("d", 85, 90);
+});

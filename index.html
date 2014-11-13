@@ -174,6 +174,39 @@ animation.img.src = "hamster-run-right-f22.png";
 				</section>
 
 				<section>
+					<pre><code>
+var keys = {};
+var keyMap = { 87: 'w', 65: 'a', 83: 's', 68: 'd' };
+
+window.addEventListener("keydown", function(e) {
+    keys[keyMap[e.keyCode]] = true;
+});
+
+window.addEventListener("keyup", function(e) {
+    keys[keyMap[e.keyCode]] = false;
+});
+					</code></pre>
+				</section>
+
+				<section data-state="canvas-keyboard">
+					<canvas id="canvas-keyboard" width="640" height="300"></canvas>
+					<div>
+						<label>Speed: <input type="text" value="0.2" id="canvas-keyboard-speed" size="4" /> pixels per millisecond</label>
+					</div>
+					<pre><code>
+var boxX = 200, boxY = 100, boxSpeed = .2;
+
+function render(ctx, elapsed) {
+    if (keys["w"]) { boxY -= boxSpeed * elapsed; }
+    if (keys["a"]) { boxX -= boxSpeed * elapsed; }
+    if (keys["d"]) { boxX += boxSpeed * elapsed; }
+    if (keys["s"]) { boxY += boxSpeed * elapsed; }
+    ctx.fillRect(boxX, boxY, 100, 100);
+}
+					</code></pre>
+				</section>
+
+				<section>
 					<h1>THE END</h1>
 					<h3>BY Eric Lathrop</h3>
 					<ul>
@@ -214,7 +247,7 @@ animation.img.src = "hamster-run-right-f22.png";
 					//{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 					//{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					//{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
 				]
 			});
 
