@@ -194,14 +194,15 @@ window.addEventListener("keyup", function(e) {
 						<label>Speed: <input type="text" value="0.2" id="canvas-keyboard-speed" size="4" /> pixels per millisecond</label>
 					</div>
 					<pre><code>
-var boxX = 200, boxY = 100, boxSpeed = .2;
+var hamsterX = 200, hamsterY = 100, hamsterSpeed = .2;
 
 function render(ctx, elapsed) {
-    if (keys["w"]) { boxY -= boxSpeed * elapsed; }
-    if (keys["a"]) { boxX -= boxSpeed * elapsed; }
-    if (keys["d"]) { boxX += boxSpeed * elapsed; }
-    if (keys["s"]) { boxY += boxSpeed * elapsed; }
-    ctx.fillRect(boxX, boxY, 100, 100);
+    if (keys["w"]) { hamsterY -= hamsterSpeed * elapsed; }
+    if (keys["a"]) { hamsterX -= hamsterSpeed * elapsed; }
+    if (keys["d"]) { hamsterX += hamsterSpeed * elapsed; }
+    if (keys["s"]) { hamsterY += hamsterSpeed * elapsed; }
+    animation.advance(elapsed);
+    animation.draw(ctx, hamsterX, hamsterY);
 }
 					</code></pre>
 				</section>

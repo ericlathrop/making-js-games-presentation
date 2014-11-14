@@ -106,10 +106,10 @@ renderSlide("canvas-animation", function(canvas, ctx, time, elapsed) {
 	animation.draw(ctx, 260, 25);
 });
 
-var boxX = 200, boxY = 100, boxSpeed = .2;
+var hamsterX = 200, hamsterY = 100, hamsterSpeed = .2;
 var canvasKeyboardSpeedInput = document.getElementById("canvas-keyboard-speed");
 var updateCanvasKeyboardSpeed = function() {
-	boxSpeed = parseFloat(canvasKeyboardSpeedInput.value);
+	hamsterSpeed = parseFloat(canvasKeyboardSpeedInput.value);
 };
 canvasKeyboardSpeedInput.addEventListener("keyup", updateCanvasKeyboardSpeed);
 updateCanvasKeyboardSpeed();
@@ -125,19 +125,19 @@ renderSlide("canvas-keyboard", function(canvas, ctx, time, elapsed) {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 	if (keys["w"]) {
-		boxY -= boxSpeed * elapsed;
+		hamsterY -= hamsterSpeed * elapsed;
 	}
 	if (keys["a"]) {
-		boxX -= boxSpeed * elapsed;
+		hamsterX -= hamsterSpeed * elapsed;
 	}
 	if (keys["d"]) {
-		boxX += boxSpeed * elapsed;
+		hamsterX += hamsterSpeed * elapsed;
 	}
 	if (keys["s"]) {
-		boxY += boxSpeed * elapsed;
+		hamsterY += hamsterSpeed * elapsed;
 	}
-	ctx.fillStyle = "red";
-	ctx.fillRect(boxX, boxY, 100, 100);
+	animation.advance(elapsed);
+	animation.draw(ctx, hamsterX, hamsterY);
 
 	ctx.font = "40px sans-serif";
 	ctx.fillStyle = keys["w"] ? "#ff0" : "#660";
