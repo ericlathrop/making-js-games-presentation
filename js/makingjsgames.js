@@ -216,3 +216,29 @@ renderSlide("canvas-gravity", function(canvas, ctx, time, elapsed) {
 
 	drawWasd(ctx);
 });
+
+var audioContext = new AudioContext();
+var jumpSound;
+var request = new XMLHttpRequest();
+request.open("GET", "jump.mp3", true);
+request.responseType = "arraybuffer";
+request.addEventListener("readystatechange", function() {
+	if (request.readyState !== 4) {
+		return;
+	}
+	audioContext.decodeAudioData(request.response, function(buffer) {
+		jumpSound = buffer;
+	});
+});
+request.send();
+
+function playSound(buffer) {
+	var source = audioContext.createBufferSource();
+	source.buffer = buffer;
+	source.connect(audioContext.destination)
+	source.start(0);
+}
+
+document.getElementById("play-sound").addEventListener("click", function() {
+	playSound(jumpSound);
+});

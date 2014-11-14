@@ -234,6 +234,38 @@ if (hamsterY > 150) { // floor
 					</code></pre>
 				</section>
 
+				<section data-state="load-sound">
+					<pre><code class="javascript">
+var audioContext = new AudioContext();
+var jumpSound;
+
+var request = new XMLHttpRequest();
+request.open("GET", "jump.mp3", true);
+request.responseType = "arraybuffer";
+
+request.addEventListener("readystatechange", function() {
+    if (request.readyState !== 4) {
+        return;
+    }
+    audioContext.decodeAudioData(request.response, function(buffer) {
+        jumpSound = buffer;
+    });
+});
+
+request.send();
+					</code></pre>
+				</section>
+
+				<section data-state="play-sound">
+					<button id="play-sound">Play!</button>
+					<pre><code class="javascript">
+var source = audioContext.createBufferSource();
+source.buffer = buffer;
+source.connect(audioContext.destination)
+source.start(0);
+					</code></pre>
+				</section>
+
 				<section>
 					<h2>Other APIs</h2>
 					<ul>
