@@ -107,7 +107,9 @@ renderSlide("canvas-animation", function(canvas, ctx, time, elapsed) {
 	animation.draw(ctx, 260, 25);
 });
 
-var hamsterX = 200, hamsterY = 100, hamsterSpeed = .2;
+var hamsterX = 200, hamsterY = 100, hamsterSpeed = .4;
+var hamsterSpeedX = 0, hamsterSpeedY = 0;
+
 var canvasKeyboardSpeedInput = document.getElementById("canvas-keyboard-speed");
 var updateCanvasKeyboardSpeed = function() {
 	hamsterSpeed = parseFloat(canvasKeyboardSpeedInput.value);
@@ -125,21 +127,30 @@ window.addEventListener("keyup", function(e) {
 renderSlide("canvas-keyboard", function(canvas, ctx, time, elapsed) {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+	hamsterSpeedX = 0, hamsterSpeedY = 0;
 	if (keys["w"]) {
-		hamsterY -= hamsterSpeed * elapsed;
+		hamsterSpeedY = -hamsterSpeed;
 	}
 	if (keys["a"]) {
-		hamsterX -= hamsterSpeed * elapsed;
-	}
-	if (keys["d"]) {
-		hamsterX += hamsterSpeed * elapsed;
+		hamsterSpeedX = -hamsterSpeed;
 	}
 	if (keys["s"]) {
-		hamsterY += hamsterSpeed * elapsed;
+		hamsterSpeedY = hamsterSpeed;
 	}
+	if (keys["d"]) {
+		hamsterSpeedX = hamsterSpeed;
+	}
+
+	hamsterX += hamsterSpeedX * elapsed;
+	hamsterY += hamsterSpeedY * elapsed;
+
 	animation.advance(elapsed);
 	animation.draw(ctx, hamsterX, hamsterY);
 
+	drawWasd(ctx);
+});
+
+function drawWasd(ctx) {
 	ctx.font = "40px sans-serif";
 	ctx.fillStyle = keys["w"] ? "#ff0" : "#660";
 	ctx.fillText("w", 50, 50);
@@ -149,4 +160,59 @@ renderSlide("canvas-keyboard", function(canvas, ctx, time, elapsed) {
 	ctx.fillText("s", 55, 90);
 	ctx.fillStyle = keys["d"] ? "#ff0" : "#660";
 	ctx.fillText("d", 85, 90);
+}
+
+renderSlide("canvas-friction", function(canvas, ctx, time, elapsed) {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+	hamsterSpeedY = 0;
+	if (keys["w"]) {
+		hamsterSpeedY = -hamsterSpeed;
+	}
+	if (keys["s"]) {
+		hamsterSpeedY = hamsterSpeed;
+	}
+	hamsterY += hamsterSpeedY * elapsed;
+
+	if (keys["a"]) {
+		hamsterSpeedX = -1;
+	}
+	if (keys["d"]) {
+		hamsterSpeedX = 1;
+	}
+	hamsterSpeedX *= 0.9; // friction
+	hamsterX += hamsterSpeedX * elapsed;
+
+	animation.advance(elapsed);
+	animation.draw(ctx, hamsterX, hamsterY);
+
+	drawWasd(ctx);
+});
+
+renderSlide("canvas-gravity", function(canvas, ctx, time, elapsed) {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+	if (keys["w"]) {
+		hamsterSpeedY = -1;
+	}
+	hamsterSpeedY += 0.1; // gravity
+	hamsterY += hamsterSpeedY * elapsed;
+	if (hamsterY > 150) { // floor
+		hamsterY = 150;
+		hamsterSpeedY = 0;
+	}
+
+	if (keys["a"]) {
+		hamsterSpeedX = -1;
+	}
+	if (keys["d"]) {
+		hamsterSpeedX = 1;
+	}
+	hamsterSpeedX *= 0.9; // friction
+	hamsterX += hamsterSpeedX * elapsed;
+
+	animation.advance(elapsed);
+	animation.draw(ctx, hamsterX, hamsterY);
+
+	drawWasd(ctx);
 });

@@ -191,18 +191,44 @@ window.addEventListener("keyup", function(e) {
 				<section data-state="canvas-keyboard">
 					<canvas id="canvas-keyboard" width="640" height="300"></canvas>
 					<div>
-						<label>Speed: <input type="text" value="0.2" id="canvas-keyboard-speed" size="4" /> pixels per millisecond</label>
+						<label>Speed: <input type="text" value="0.4" id="canvas-keyboard-speed" size="4" /> pixels per millisecond</label>
 					</div>
 					<pre><code>
-var hamsterX = 200, hamsterY = 100, hamsterSpeed = .2;
+hamsterSpeedX = 0, hamsterSpeedY = 0;
+if (keys["w"]) { hamsterSpeedY = -0.4; }
+if (keys["a"]) { hamsterSpeedX = -0.4; }
+if (keys["s"]) { hamsterSpeedY = 0.4; }
+if (keys["d"]) { hamsterSpeedX = 0.4; }
 
-function render(ctx, elapsed) {
-    if (keys["w"]) { hamsterY -= hamsterSpeed * elapsed; }
-    if (keys["a"]) { hamsterX -= hamsterSpeed * elapsed; }
-    if (keys["d"]) { hamsterX += hamsterSpeed * elapsed; }
-    if (keys["s"]) { hamsterY += hamsterSpeed * elapsed; }
-    animation.advance(elapsed);
-    animation.draw(ctx, hamsterX, hamsterY);
+hamsterX += hamsterSpeedX * elapsed;
+hamsterY += hamsterSpeedY * elapsed;
+					</code></pre>
+				</section>
+
+				<section data-state="canvas-friction">
+					<canvas id="canvas-friction" width="640" height="300"></canvas>
+					<pre><code>
+if (keys["a"]) {
+    hamsterSpeedX = -1;
+}
+if (keys["d"]) {
+    hamsterSpeedX = 1;
+}
+hamsterSpeedX *= 0.9; // friction
+hamsterX += hamsterSpeedX * elapsed;
+					</code></pre>
+				</section>
+				<section data-state="canvas-gravity">
+					<canvas id="canvas-gravity" width="640" height="300"></canvas>
+					<pre><code>
+if (keys["w"]) {
+    hamsterSpeedY = -1;
+}
+hamsterSpeedY += 0.1; // gravity
+hamsterY += hamsterSpeedY * elapsed;
+if (hamsterY > 150) { // floor
+    hamsterY = 150;
+    hamsterSpeedY = 0;
 }
 					</code></pre>
 				</section>
