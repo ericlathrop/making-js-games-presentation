@@ -2734,17 +2734,6 @@ var Reveal = (function(){
 		if( triggered ) {
 			event.preventDefault();
 		}
-		// ESC or O key
-		else if ( ( event.keyCode === 27 || event.keyCode === 79 ) && features.transforms3d ) {
-			if( dom.preview ) {
-				closePreview();
-			}
-			else {
-				toggleOverview();
-			}
-
-			event.preventDefault();
-		}
 
 		// If auto-sliding is enabled we need to cue up
 		// another timeout
