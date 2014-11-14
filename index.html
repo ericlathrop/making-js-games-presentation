@@ -277,8 +277,13 @@ if (hamsterY > 150) { // floor
 					</section>
 				</section>
 
-				<section data-state="load-sound">
-					<pre><code class="javascript">
+				<section>
+					<section>
+						<h2>Sound</h2>
+					</section>
+
+					<section data-state="load-sound">
+						<pre><code class="javascript">
 var audioContext = new AudioContext();
 var jumpSound;
 
@@ -296,29 +301,42 @@ request.addEventListener("readystatechange", function() {
 });
 
 request.send();
-					</code></pre>
-				</section>
+						</code></pre>
+					</section>
 
-				<section data-state="play-sound">
-					<button id="play-sound">Play!</button>
-					<pre><code class="javascript">
+					<section data-state="play-sound">
+						<button id="play-sound">Play!</button>
+						<pre><code class="javascript">
 var source = audioContext.createBufferSource();
 source.buffer = buffer;
 source.connect(audioContext.destination)
 source.start(0);
-					</code></pre>
+						</code></pre>
+					</section>
 				</section>
 
-				<section data-state="canvas-jump">
-					<canvas id="canvas-jump" width="640" height="300"></canvas>
-					<pre><code class="javascript">
+				<section>
+					<section>
+						<h2>Putting It All Together</h2>
+					</section>
+
+					<section data-state="canvas-jump">
+						<canvas id="canvas-jump" width="640" height="300"></canvas>
+						<pre><code class="javascript">
 if (keys["w"]) {
     if (hamsterY === 150) { // on floor
         playSound(jumpSound);
         hamsterSpeedY = -1.5;
     }
 }
-					</code></pre>
+						</code></pre>
+					</section>
+
+					<section>
+						<a href="http://twoscoopgames.com/stanleysqueaks/" target="_blank">
+							<img src="stanleysqueaks.png" alt="Stanley Squeaks and the Emerald Burrito" />
+						</a>
+					</section>
 				</section>
 
 				<section>
