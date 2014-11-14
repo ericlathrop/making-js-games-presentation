@@ -189,11 +189,14 @@ renderSlide("canvas-friction", function(canvas, ctx, time, elapsed) {
 	drawWasd(ctx);
 });
 
-renderSlide("canvas-gravity", function(canvas, ctx, time, elapsed) {
+renderSlide("canvas-jump", function(canvas, ctx, time, elapsed) {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 	if (keys["w"]) {
-		hamsterSpeedY = -1;
+		if (hamsterY === 150) { // on floor
+			playSound(jumpSound);
+			hamsterSpeedY = -1.5;
+		}
 	}
 	hamsterSpeedY += 0.1; // gravity
 	hamsterY += hamsterSpeedY * elapsed;
@@ -211,7 +214,9 @@ renderSlide("canvas-gravity", function(canvas, ctx, time, elapsed) {
 	hamsterSpeedX *= 0.9; // friction
 	hamsterX += hamsterSpeedX * elapsed;
 
-	animation.advance(elapsed);
+	if (Math.abs(hamsterSpeedX) > 0.05) {
+		animation.advance(elapsed);
+	}
 	animation.draw(ctx, hamsterX, hamsterY);
 
 	drawWasd(ctx);

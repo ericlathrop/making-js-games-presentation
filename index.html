@@ -266,6 +266,18 @@ source.start(0);
 					</code></pre>
 				</section>
 
+				<section data-state="canvas-jump">
+					<canvas id="canvas-jump" width="640" height="300"></canvas>
+					<pre><code class="javascript">
+if (keys["w"]) {
+    if (hamsterY === 150) { // on floor
+        playSound(jumpSound);
+        hamsterSpeedY = -1.5;
+    }
+}
+					</code></pre>
+				</section>
+
 				<section>
 					<h2>Other APIs</h2>
 					<ul>
