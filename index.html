@@ -360,6 +360,7 @@ if (keys["w"]) {
 					</section>
 
 					<section>
+						<h2><a href="https://developer.chrome.com/extensions/manifest">manifest.json</a></h2>
 						<pre><code class="json">
 {
     "name": "Scurry",
@@ -379,7 +380,41 @@ if (keys["w"]) {
         "storage"
     ]
 }
-					</code></pre>
+						</code></pre>
+					</section>
+
+					<section>
+						<h2>background.js</h2>
+						<pre><code class="javascript">
+chrome.app.runtime.onLaunched.addListener(function() {
+    chrome.app.window.create('index.html', {
+        'bounds': {
+            'width': 1136,
+            'height': 640
+        }
+    });
+});
+						</code></pre>
+					</section>
+
+					<section>
+						<h2>Storage API</h2>
+						<pre><code class="javascript">
+chrome.storage.sync.get([ 'key1', 'key2' ], function(data) {
+	console.log(data); // { 'key1': value1, 'key2': value2 }
+});
+
+chrome.storage.sync.set({ 'key1': value1, 'key2': value2 }, function() {
+	console.log("saved!");
+});
+						</code></pre>
+					</section>
+
+					<section>
+						<img src="chrome-web-store-upload.png" alt="Chrome Web Store Developer Dashboard" />
+					</section>
+				</section>
+
 				</section>
 
 				<section>
