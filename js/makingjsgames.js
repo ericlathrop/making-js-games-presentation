@@ -16,8 +16,9 @@ function makeRender(renderFunc) {
 		return elapsed;
 	}
 
+	var initialState = state;
 	var render = function(time) {
-		if (!state) {
+		if (state !== initialState) {
 			return;
 		}
 
