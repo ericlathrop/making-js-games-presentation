@@ -207,6 +207,60 @@ renderSlide("canvas-friction", function(canvas, ctx, time, elapsed) {
 	drawWasd(ctx);
 });
 
+renderSlide("canvas-gravity", function(canvas, ctx, time, elapsed) {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+	if (keys["w"]) {
+		hamsterSpeedY = -1;
+	}
+	hamsterSpeedY += 0.1; // gravity
+	hamsterY += hamsterSpeedY * elapsed;
+	if (hamsterY > 150) { // floor
+		hamsterY = 150;
+		hamsterSpeedY = 0;
+	}
+
+	if (keys["a"]) {
+		hamsterSpeedX = -1;
+	}
+	if (keys["d"]) {
+		hamsterSpeedX = 1;
+	}
+	hamsterSpeedX *= 0.9; // friction
+	hamsterX += hamsterSpeedX * elapsed;
+
+	animation.advance(elapsed);
+	animation.draw(ctx, hamsterX, hamsterY);
+
+	drawWasd(ctx);
+});
+
+var audioContext = new AudioContext();
+var jumpSound;
+var request = new XMLHttpRequest();
+request.open("GET", "jump.mp3", true);
+request.responseType = "arraybuffer";
+request.addEventListener("readystatechange", function() {
+	if (request.readyState !== 4) {
+		return;
+	}
+	audioContext.decodeAudioData(request.response, function(buffer) {
+		jumpSound = buffer;
+	});
+});
+request.send();
+
+function playSound(buffer) {
+	var source = audioContext.createBufferSource();
+	source.buffer = buffer;
+	source.connect(audioContext.destination)
+	source.start(0);
+}
+
+document.getElementById("play-sound").addEventListener("click", function() {
+	playSound(jumpSound);
+});
+
 renderSlide("canvas-jump", function(canvas, ctx, time, elapsed) {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -238,30 +292,4 @@ renderSlide("canvas-jump", function(canvas, ctx, time, elapsed) {
 	animation.draw(ctx, hamsterX, hamsterY);
 
 	drawWasd(ctx);
-});
-
-var audioContext = new AudioContext();
-var jumpSound;
-var request = new XMLHttpRequest();
-request.open("GET", "jump.mp3", true);
-request.responseType = "arraybuffer";
-request.addEventListener("readystatechange", function() {
-	if (request.readyState !== 4) {
-		return;
-	}
-	audioContext.decodeAudioData(request.response, function(buffer) {
-		jumpSound = buffer;
-	});
-});
-request.send();
-
-function playSound(buffer) {
-	var source = audioContext.createBufferSource();
-	source.buffer = buffer;
-	source.connect(audioContext.destination)
-	source.start(0);
-}
-
-document.getElementById("play-sound").addEventListener("click", function() {
-	playSound(jumpSound);
 });
