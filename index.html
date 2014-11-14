@@ -53,7 +53,7 @@
 
 				<section>
 					<canvas id="canvas" width="640" height="480"></canvas>
-					<pre><code>
+					<pre><code class="html">
 <canvas id="canvas" width="640" height="480"></canvas>
 					</code></pre>
 				</section>
@@ -66,7 +66,7 @@
 						ctx.fillStyle = "#f00";
 						ctx.fillRect(270, 190, 100, 100);
 					</script>
-					<pre><code>
+					<pre><code class="javascript">
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 ctx.fillStyle = "#f00";
@@ -83,7 +83,7 @@ ctx.fillRect(270, 190, 100, 100);
 						ctx.font = "60px sans-serif";
 						ctx.fillText("Hello World!", 150, 250);
 					</script>
-					<pre><code>
+					<pre><code class="javascript">
 						ctx.fillStyle = "yellow";
 						ctx.font = "60px sans-serif";
 						ctx.fillText("Hello World!", 150, 250);
@@ -101,7 +101,7 @@ ctx.fillRect(270, 190, 100, 100);
 						});
 						logo.src = "two-scoop-games-logo.png";
 					</script>
-					<pre><code>
+					<pre><code class="javascript">
 var logo = new Image();
 logo.addEventListener("load", function() {
     ctx.drawImage(logo, 70, 100);
@@ -112,7 +112,7 @@ logo.src = "two-scoop-games-logo.png";
 
 				<section data-state="canvas-render-loop">
 					<canvas id="canvas-render-loop" width="640" height="300"></canvas>
-					<pre><code>
+					<pre><code class="javascript">
 function render(time) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "yellow";
@@ -126,7 +126,7 @@ window.requestAnimationFrame(render);
 
 				<section data-state="canvas-render-loop-elapsed">
 					<canvas id="canvas-render-loop-elapsed" width="640" height="300"></canvas>
-					<pre><code>
+					<pre><code class="javascript">
 var lastTime = -1;
 function elapsedTime(time) {
     var elapsed = time - lastTime;
@@ -141,7 +141,7 @@ function elapsedTime(time) {
 
 				<section data-state="canvas-fps">
 					<canvas id="canvas-fps" width="640" height="300"></canvas>
-					<pre><code>
+					<pre><code class="javascript">
 var fps = Math.floor((1 / elapsed) * 1000) + " FPS";
 					</code></pre>
 				</section>
@@ -151,7 +151,7 @@ var fps = Math.floor((1 / elapsed) * 1000) + " FPS";
 					<div>
 						<label>Milliseconds per frame: <input type="text" value="40" id="canvas-animation-time" size="4" /></label>
 					</div>
-					<pre><code>
+					<pre><code class="javascript">
 var animation = {
     img: new Image(),
     time: 0,
@@ -174,7 +174,7 @@ animation.img.src = "hamster-run-right-f22.png";
 				</section>
 
 				<section>
-					<pre><code>
+					<pre><code class="javascript">
 var keys = {};
 var keyMap = { 87: 'w', 65: 'a', 83: 's', 68: 'd' };
 
@@ -193,7 +193,7 @@ window.addEventListener("keyup", function(e) {
 					<div>
 						<label>Speed: <input type="text" value="0.4" id="canvas-keyboard-speed" size="4" /> pixels per millisecond</label>
 					</div>
-					<pre><code>
+					<pre><code class="javascript">
 hamsterSpeedX = 0, hamsterSpeedY = 0;
 if (keys["w"]) { hamsterSpeedY = -0.4; }
 if (keys["a"]) { hamsterSpeedX = -0.4; }
@@ -207,7 +207,7 @@ hamsterY += hamsterSpeedY * elapsed;
 
 				<section data-state="canvas-friction">
 					<canvas id="canvas-friction" width="640" height="300"></canvas>
-					<pre><code>
+					<pre><code class="javascript">
 if (keys["a"]) {
     hamsterSpeedX = -1;
 }
@@ -218,9 +218,10 @@ hamsterSpeedX *= 0.9; // friction
 hamsterX += hamsterSpeedX * elapsed;
 					</code></pre>
 				</section>
+
 				<section data-state="canvas-gravity">
 					<canvas id="canvas-gravity" width="640" height="300"></canvas>
-					<pre><code>
+					<pre><code class="javascript">
 if (keys["w"]) {
     hamsterSpeedY = -1;
 }
