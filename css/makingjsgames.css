@@ -1,3 +1,7 @@
 .reveal canvas {
 	border: 3px solid #fff;
 }
+.reveal section img {
+	border: none;
+	background: transparent;
+}
