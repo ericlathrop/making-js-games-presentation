@@ -94,6 +94,24 @@ var animation = {
 };
 animation.img.src = "hamster-run-right-f22.png";
 
+var canvasDrawFrame = 0;
+var canvasDrawFrameInput = document.getElementById("canvas-draw-frame");
+var updateCanvasDrawFrame = function() {
+	canvasDrawFrame = parseInt(canvasDrawFrameInput.value);
+};
+canvasDrawFrameInput.addEventListener("keyup", updateCanvasDrawFrame);
+updateCanvasDrawFrame();
+renderSlide("canvas-draw-image-slice", function(canvas, ctx, time, elapsed) {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+	var img = animation.img;
+	var frames = 22;
+	var frameWidth = img.width / frames;
+	var frameX = canvasDrawFrame * frameWidth;
+
+	ctx.drawImage(img, frameX, 0, frameWidth, img.height, 260, 25, frameWidth, img.height);
+});
+
 var canvasAnimTimeInput = document.getElementById("canvas-animation-time");
 var updateCanvasAnimTime = function() {
 	animation.msPerFrame = parseInt(canvasAnimTimeInput.value);

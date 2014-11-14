@@ -158,12 +158,36 @@ var fps = Math.floor((1 / elapsed) * 1000) + " FPS";
 					</section>
 				</section>
 
-				<section data-state="canvas-animation">
-					<canvas id="canvas-animation" width="640" height="200"></canvas>
-					<div>
-						<label>Milliseconds per frame: <input type="text" value="40" id="canvas-animation-time" size="4" /></label>
-					</div>
-					<pre><code class="javascript">
+				<section>
+					<section>
+						<h2>Animation</h2>
+					</section>
+
+					<section>
+						<img src="hamster-run-right-f22.png" />
+					</section>
+
+					<section data-state="canvas-draw-image-slice">
+						<canvas id="canvas-draw-image-slice" width="640" height="200"></canvas>
+						<div>
+							<label>Frame: <input type="text" value="0" id="canvas-draw-frame" size="4" /></label>
+						</div>
+						<pre><code class="javascript">
+var frame = 0;
+var frames = 22;
+var frameWidth = img.width / frames;
+var frameX = frame * frameWidth;
+
+ctx.drawImage(img, frameX, 0, frameWidth, img.height, 260, 25, frameWidth, img.height);
+						</code></pre>
+					</section>
+
+					<section data-state="canvas-animation">
+						<canvas id="canvas-animation" width="640" height="200"></canvas>
+						<div>
+							<label>Milliseconds per frame: <input type="text" value="40" id="canvas-animation-time" size="4" /></label>
+						</div>
+						<pre><code class="javascript">
 var animation = {
     img: new Image(),
     time: 0,
@@ -182,7 +206,8 @@ var animation = {
     }
 };
 animation.img.src = "hamster-run-right-f22.png";
-					</code></pre>
+						</code></pre>
+					</section>
 				</section>
 
 				<section>
