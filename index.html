@@ -426,8 +426,58 @@ chrome.storage.sync.set({ 'key1': value1, 'key2': value2 }, function() {
 					</section>
 
 					<section>
-						<h2><a href="http://impactjs.com/ejecta">Ejecta</a></h2>
+						<img src="cordova.png" alt="Don't use Apache Cordova" />
+					</section>
+
+					<section>
+						<div>
+							<a href="http://impactjs.com/ejecta"><img src="ejecta.png" alt="Use Ejecta" /></a>
+						</div>
 						<img src="ejecta-overview.png" alt="Overview of Ejecta" />
+					</section>
+					<section>
+						<pre><code class="javascript">
+ejecta.include("game.js");
+
+ejecta.openURL("http://twoscoopgames.com/", "Open the Two Scoop Games website?");
+
+ejecta.getText("Highscore", "Please enter your name", function(text) {
+    console.log(text);
+});
+
+ejecta.loadFont("path/to/my/font.ttf");
+						</code></pre>
+					</section>
+
+					<section>
+						<h2>HTML5 Supported Features</h2>
+						<ul>
+							<li>&lt;canvas&gt;</li>
+							<li>&lt;audio&gt;</li>
+							<li>&lt;image&gt;</li>
+							<li>localStorage</li>
+							<li>WebSocket</li>
+							<li>XMLHttpRequest</li>
+							<li>Page Visibility</li>
+							<li>Multitouch</li>
+							<li>Device Orientation / Motion</li>
+							<li>Geolocation</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Other Supported Features</h2>
+						<ul>
+							<li>Game Center</li>
+							<li>In-app Purchases</li>
+							<li>iAd</li>
+						</ul>
+					</section>
+
+					<section>
+						<a href="https://itunes.apple.com/us/app/syrush/id903688443?mt=8">
+							<img src="syrush.png" alt="SyRUSH on the iOS App Store" />
+						</a>
 					</section>
 				</section>
 
